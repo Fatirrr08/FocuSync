@@ -27,8 +27,17 @@ const isReal =
 let supabase: SupabaseClient;
 
 if (isReal) {
+  if (typeof window !== 'undefined') {
+    console.log("🚀 Supabase Client initialized successfully in PRODUCTION mode.");
+  }
   supabase = createClient(supabaseUrl, supabaseAnonKey);
 } else {
+  if (typeof window !== 'undefined') {
+    console.warn(
+      "⚠️ FocuSync Supabase Warning: NEXT_PUBLIC_SUPABASE_URL atau NEXT_PUBLIC_SUPABASE_ANON_KEY tidak dikonfigurasi dengan benar.\n" +
+      "Aplikasi berjalan dalam OFFLINE MOCK MODE. Data akan disimpan secara lokal di LocalStorage."
+    );
+  }
   // ─────────────────────────────────────────────────────────
   // FULL OFFLINE MOCK — demo@focusync.com / focusync123
   // ─────────────────────────────────────────────────────────
